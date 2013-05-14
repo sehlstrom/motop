@@ -8,7 +8,6 @@ function [E, dE, ddE] = Eramp(x, E0, Emin, q)
 %
 %   SYNTAX
 %   E = ERAMP(x, E0, Emin, q)
-%   [E] = ERAMP(...)
 %   [E, dE] = ERAMP(...)
 %   [E, dE, ddE] = ERAMP(...)
 %
@@ -34,6 +33,15 @@ function [E, dE, ddE] = Eramp(x, E0, Emin, q)
 
 % LAST MODIFIED: A Sehlstrom    2013-05-14
 % Copyright (C)  A Sehlstrom
+
+if length(varargin) < 4
+    error('Eramp:argChk', '4 or more inputs needed')
+end
+
+x    = varargin{1};
+E0   = varargin{2};
+Emin = varargin{3};
+q    = varargin{4};
 
 E = Emin + x./( 1+ q.*(1-x) ) * (E0-Emin);
 

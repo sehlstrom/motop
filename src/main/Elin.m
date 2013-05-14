@@ -1,4 +1,4 @@
-function [E, dE, ddE] = Elin(x, E0, Emin, q)
+function [E, dE, ddE] = Elin(varargin)
 %ELIN Compute Young's modulus according to a linear
 %interpolation scheme
 %   EQUATION
@@ -7,10 +7,9 @@ function [E, dE, ddE] = Elin(x, E0, Emin, q)
 %       E = E0*x
 %
 %   SYNTAX
-%   E = ELIN(x, E0, Emin, q)
-%   [E] = ELIN(...)
-%   [E, dE] = ELIN(...)
-%   [E, dE, ddE] = ELIN(...)
+%   E = ELIN(x, E0)
+%   [E, dE] = ELIN(…)
+%   [E, dE, ddE] = ELIN(…)
 %
 %   DESCRIPTION
 %   ELIN computes Young's modulus according to a linear
@@ -20,9 +19,6 @@ function [E, dE, ddE] = Elin(x, E0, Emin, q)
 %   INPUT ARGUMENTS
 %       x      vector of design parameters; 0 <= x <= 1
 %       E0     base Young's modulus; for x = 1, the output E = E0.
-%       Emin   minimum stiffness; set to > 0 in order to avoid
-%              singularities when x = 0 or small.
-%       q      interpolation constant
 %
 %   OUTPUT ARGUMENTS
 %       E      vector of Young's modulus corresponding to the parameters
@@ -34,6 +30,13 @@ function [E, dE, ddE] = Elin(x, E0, Emin, q)
 
 % LAST MODIFIED: A Sehlstrom    2013-05-14
 % Copyright (C)  A Sehlstrom
+
+if length(varargin) < 2
+    error('Elin:argChk', '2 or more inputs needed')
+end
+
+x  = varargin{1};
+E0 = varargin{2};
 
 E = x.*E0;
 

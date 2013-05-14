@@ -2,9 +2,9 @@
 ## Young's Modulus Interpolation Functions
 All Young's modulus interpolation functions, 'E*.m', have the following syntax:
 
-    E = E(vargins)
-    [E, dE] = E(vargins)
-    [E, dE, ddE] = E(vargins)
+    E = E(varargin)
+    [E, dE] = E(varargin)
+    [E, dE, ddE] = E(varargin)
 
 Functions:
 * __Elin.m__ linear interpolation of Young's modulus

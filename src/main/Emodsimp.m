@@ -8,7 +8,6 @@ function [E, dE, ddE] = Emodsimp(x, E0, Emin, p)
 %
 %   SYNTAX
 %   E = EMODSIMP(x, E0, Emin, p)
-%   [E] = EMODSIMP(...)
 %   [E, dE] = EMODSIMP(...)
 %   [E, dE, ddE] = EMODSIMP(...)
 %
@@ -34,6 +33,15 @@ function [E, dE, ddE] = Emodsimp(x, E0, Emin, p)
 
 % LAST MODIFIED: A Sehlstrom    2013-05-14
 % Copyright (C)  A Sehlstrom
+
+if length(varargin) < 4
+    error('Emodsimp:argChk', '4 or more inputs needed')
+end
+
+x    = varargin{1};
+E0   = varargin{2};
+Emin = varargin{3};
+p    = varargin{4};
 
 E = (Emin + x.^p * (E0-Emin));
 
