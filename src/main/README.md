@@ -7,6 +7,6 @@ All Young's modulus interpolation functions, 'E*.m', have the following syntax:
     [E, dE, ddE] = E(varargin)
 
 Functions:
-* __Elin.m__ linear interpolation of Young's modulus
-* __Emodsimp.m__ ModSIMP interpolation of Young's modulus
-* __Eramp.m__ RAMP interpolation of Young's modulus
+* __ELin.m__ linear interpolation of Young's modulus
+* __EModSIMP.m__ ModSIMP interpolation of Young's modulus
+* __ERAMP.m__ RAMP interpolation of Young's modulus
