@@ -1,4 +1,4 @@
-function [E, dE, ddE] = Elin(varargin)
+function [E, dE, ddE] = ELin(varargin)
 %ELIN Compute Young's modulus according to a linear
 %interpolation scheme
 %   EQUATION
@@ -28,7 +28,7 @@ function [E, dE, ddE] = Elin(varargin)
 %
 % See also: Emodsimp Eramp
 
-% LAST MODIFIED: A Sehlstrom    2013-05-14
+% LAST MODIFIED: A Sehlstrom    2013-05-15
 % Copyright (C)  A Sehlstrom
 
 if length(varargin) < 2
