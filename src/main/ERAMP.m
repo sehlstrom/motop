@@ -1,4 +1,4 @@
-function [E, dE, ddE] = Eramp(x, E0, Emin, q)
+function [E, dE, ddE] = ERAMP(x, E0, Emin, q)
 %ERAMP Compute Young's modulus according to the RAMP
 %interpolation scheme
 %   EQUATION
