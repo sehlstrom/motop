@@ -1,4 +1,4 @@
-function [E, dE, ddE] = Emodsimp(x, E0, Emin, p)
+function [E, dE, ddE] = EModSIMP(x, E0, Emin, p)
 %EMODSIMP Compute Young's modulus according to the modified SIMP
 %interpolation scheme
 %   EQUATION
