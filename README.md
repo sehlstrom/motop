@@ -18,3 +18,5 @@ where:
   * *x* is a vector of design parameters; usually *x* represents some material property or a geometrical property, e.g. density or thickness,
   * *y{x}* is a state variable describing some response of the structure, e.g. the stress.
 
+## License
+motop is distributed under a BSD-style license. See the file COPYING for more information.
