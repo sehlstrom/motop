@@ -31,10 +31,10 @@ function [E, dE, ddE] = EModSIMP(x, E0, Emin, p)
 %
 % See also: Elin Eramp
 
-% LAST MODIFIED: A Sehlstrom    2013-05-14
+% LAST MODIFIED: A Sehlstrom    2013-05-21
 % Copyright (C)  A Sehlstrom
 
-if length(varargin) < 4
+if nargin < 4
     error('Emodsimp:argChk', '4 or more inputs needed')
 end
 

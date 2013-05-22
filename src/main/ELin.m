@@ -31,7 +31,7 @@ function [E, dE, ddE] = ELin(varargin)
 % LAST MODIFIED: A Sehlstrom    2013-05-21
 % Copyright (C)  A Sehlstrom
 
-if length(varargin) < 2
+if nargin < 2
     error('Elin:argChk', '2 or more inputs needed')
 end
 
