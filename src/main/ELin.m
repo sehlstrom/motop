@@ -8,8 +8,8 @@ function [E, dE, ddE] = ELin(varargin)
 %
 %   SYNTAX
 %   E = ELIN(x, E0)
-%   [E, dE] = ELIN(…)
-%   [E, dE, ddE] = ELIN(…)
+%   [E, dE] = ELIN(...)
+%   [E, dE, ddE] = ELIN(...)
 %
 %   DESCRIPTION
 %   ELIN computes Young's modulus according to a linear
@@ -28,7 +28,7 @@ function [E, dE, ddE] = ELin(varargin)
 %
 % See also: Emodsimp Eramp
 
-% LAST MODIFIED: A Sehlstrom    2013-05-15
+% LAST MODIFIED: A Sehlstrom    2013-05-21
 % Copyright (C)  A Sehlstrom
 
 if length(varargin) < 2
