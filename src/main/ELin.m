@@ -28,15 +28,12 @@ function [E, dE, ddE] = ELin(varargin)
 %
 % See also: Emodsimp Eramp
 
-% LAST MODIFIED: A Sehlstrom    2013-05-15
+% LAST MODIFIED: A Sehlstrom    2013-05-21
 % Copyright (C)  A Sehlstrom
 
-if length(varargin) < 2
+if nargin < 2
     error('Elin:argChk', '2 or more inputs needed')
 end
-
-x  = varargin{1};
-E0 = varargin{2};
 
 E = x.*E0;
 
