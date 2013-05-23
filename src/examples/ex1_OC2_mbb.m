@@ -67,7 +67,7 @@ E0    = 200e9;                           % base material Young's modulus
 Emin  = E0/1e9;                          % minimum Young's modulus
 nu0   = 0.3;                             % base material Poisson's ratio
 rho0  = 7800;                            % base material density
-t     = 0.04*nelx*lx;                    % element thickness [m]
+t     = 0.04*nelx*l;                     % element thickness [m]
 ep    = [E0, Emin, nu0, rho0, t, l];     % element properties
 
 ptype = 1;                               % plane stress
