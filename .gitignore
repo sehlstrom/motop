@@ -1,2 +1,8 @@
+# OS-related file
 .DS_store
+
+# Temporary m-files
 *.m~
+
+# Testfiles
+src/test/*
