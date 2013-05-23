@@ -31,7 +31,7 @@ function [E, dE, ddE] = ERAMP(varargin)
 %
 % See also: Elin Emodsimp
 
-% LAST MODIFIED: A Sehlstrom    2013-05-21
+% LAST MODIFIED: A Sehlstrom    2013-05-23
 % Copyright (C)  A Sehlstrom
 
 if nargin < 4
@@ -47,6 +47,6 @@ E = Emin + x./( 1+ q.*(1-x) ) * (E0-Emin);
 
 dE = (1+q)./((1+q*(1-x)).^2) * (E0-Emin);
 
-ddE = 2*q * (q+1)./(1 + q*(1-x))^3 *(E0-Emin);
+ddE = 2*q * (q+1)./(1 + q*(1-x)).^3 *(E0-Emin);
 
 end
