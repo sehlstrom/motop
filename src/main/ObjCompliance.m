@@ -1,28 +1,29 @@
-function [ C, dC ] = OCompliance( x, xp, varargin )
-%OCOMPLIANCE calculates the compliance C and the first order compliance
+function [ C, dC ] = ObjCompliance( s )
+%OBJCOMPLIANCE calculates the compliance C and the first order compliance
 %derivative dC with respect to x for a given design x with global stiffness
 %K and element unit stiffess Ke0 which is loaded with global force vector F
 %
 %   SYNTAX
-%       C = OCompliance( x, xp, Edof, bc, F, K, Ke0, E, dE )
-%       [C,dC] = OCompliance( x, xp, Edof, bc, F, K, Ke0, E, dE )
+%   C = OBJCOMPLIANCE( s )
+%   [C,dC] = OBJCOMPLIANCE( s )
 %
 %   DESCRIPTION
-%       Compliance is a scalar measure of a strucutres stiffness such that
-%       the compliance is low for a strucutre with high stiffness.
+%   Compliance is a scalar measure of a strucutres stiffness such that the 
+%   compliance is low for a strucutre with high stiffness.
 %
-%       OCOMPLIANCE computes the compliance as:
+%   OBJCOMPLIANCE computes the compliance as:
 %
-%           C = sum(E*ue'*Ke0*ue),
+%       C = sum(E*ue'*Ke0*ue),
 %
-%       and the first order derivative of C with respect to x according to:
+%   and the first order derivative of C with respect to x according to:
 %
-%           dC = -dE*ue'*Ke0*ue,
+%       dC = -dE*ue'*Ke0*ue,
 %
-%       where ue is the elemnt displacement solved from the equilibrium
-%       equation K*u=F.
+%   where ue is the elemnt displacement solved from the equilibrium
+%   equation K*u=F.
 %
 %   INPUT ARGUMENTS
+%   s   a struct with at least the following fields
 %       x      vector of design parameters, size(x) = (nelem x 1) where
 %              nelem is the number of elements; 0 <= x0 <= 1
 %       xp     prescribed parameters matrix, size(xp) = (npx x 2) where
@@ -53,40 +54,52 @@ function [ C, dC ] = OCompliance( x, xp, varargin )
 % LAST MODIFIED: A Sehlstrom    2013-05-23
 % Copyright (C)  A Sehlstrom
 
+% Parse inputs ------------------------------------------------------------
+parseo = inputParser;
+addRequired(parseo,'s', @isstruct);
+parseo.parse(s);
+
+% Extract
+x    = s.x;
+xp   = s.xp;
+Edof = s.Edof;
+bc   = s.bc;
+F    = s.F;
+K    = s.K;
+Ke0  = s.Ke0;
+E    = s.E;
+dE   = s.dE;
+
 % Input checks ------------------------------------------------------------
-if nargin < 9
-    error('OCompliance:argChk', '9 inputs needed')
-end
-
 if size(x,2) ~= 1
-    error('OCompliance:argChk', '"x" must be a row vector');
+    error('OCompliance:argChk', '"x" must be a row vector of length nelem');
 end
-
-Edof = varargin{1};
-bc   = varargin{2};
-F    = varargin{3};
-K    = varargin{4};
-Ke0  = varargin{5};
-E    = varargin{6};
-dE   = varargin{7};
 
 if size(x,1) ~= size(Edof,1)
     error('OCompliance:argChk', '"x" and "Edof" has to have the same number of rows');
 end
 
-if size(x) ~= size(E)
+if isnan(E)
+    error('OCompliance:argChk', '"E" has to be specified in struct "s"');
+elseif size(x) ~= size(E)
     error('OCompliance:argChk', '"x" and "E" has to have the same size');
 end
 
-if size(x) ~= size(dE)
+if isnan(dE)
+    error('OCompliance:argChk', '"dE" has to be specified in struct "s"');
+elseif size(x) ~= size(dE)
     error('OCompliance:argChk', '"x" and "dE" has to have the same size');
 end
 
-if size(Ke0,1) ~= size(Edof,2)
+if isnan(Ke0)
+    error('OCompliance:argChk', '"Ke0" has to be specified in struct "s"');
+elseif size(Ke0,1) ~= size(Edof,2)
     error('OCompliance:argChk', '"Ke0" has not the same number of DOFs as specified in "Edof"');
 end
 
-if size(K,1) ~= max(max(Edof))
+if isnan(K)
+    error('OCompliance:argChk', '"K" has to be specified in struct "s"');
+elseif size(K,1) ~= max(max(Edof))
     error('OCompliance:argChk', 'Number of DOFs in "K" and in "Edof" is not equal');
 end
 
