@@ -1,5 +1,5 @@
-function [H, Hs]=FUsetup(ec, rmin)
-%FUSETUP is a filter utility function that computes the convolutionary
+function [H, Hs]=UFilterSetup(ec, rmin)
+%UFILTERSETUP is a filter utility function that computes the convolutionary
 %factor H and it's row sums Hs used in mesh independend filters.
 %    EQUATION
 %    The convolutionary operator is determined according to
@@ -12,14 +12,14 @@ function [H, Hs]=FUsetup(ec, rmin)
 %        Hs = sum(H,2)
 %
 %    SYNTAX
-%    [H, Hs]=FUsetup(ec, rmin)
+%    [H, Hs]=UFILTERSETUP(ec, rmin)
 %
 %    DESCRIPTION
-%    FUSETUP computes the linear convolutionary operator and it's row sums
-%    used in a mesh independend filter. For element ee, the filter area
-%    (2D) or volume (3D) is bounded by the perimiter of a circle or sphear
-%    with radius rmin. Thus, only the properties of elements ii that has
-%    their centroid whitin the filter area/volume will be taken into
+%    UFILTERSETUP computes the linear convolutionary operator and it's row
+%    sums used in a mesh independend filter. For element ee, the filter
+%    area (2D) or volume (3D) is bounded by the perimiter of a circle or
+%    sphere with radius rmin. Thus, only the properties of elements ii that
+%    has their centroid whitin the filter area/volume will be taken into
 %    consideration by the filter; outside the filter area, the filter has
 %    no effect.
 %
@@ -45,10 +45,10 @@ function [H, Hs]=FUsetup(ec, rmin)
 %       Hs     row sums of the convolutionary operator; one row for each
 %              element ee.
 %
-% See also: Fdensity Fsensitvity
+% See also: FDensity FSensitvity
 % 
 
-% LAST MODIFIED: A Sehlstrom    2013-05-15
+% LAST MODIFIED: A Sehlstrom    2013-05-23
 % Copyright (C)  A Sehlstrom
 
 [rows,cols] = size(ec);
