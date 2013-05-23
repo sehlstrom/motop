@@ -47,10 +47,11 @@ end
 % Generate the mesh -------------------------------------------------------
 nelx = 32;                               % number of elements in x-direc.
 nely = 20;                               % number of elements in y-direc.
-l    = 0.01;                             % element side length
+lx   = 0.01;                             % element side length in x-direc.
+ly   = lx;                               % element side length in y-direc.
 
 [Ndof, Ncoord, Edof, Ex, Ey] = ...       % make the rectangular mesh
-    MURectangle2(nelx, nely, l, l);
+    UMeshRectangle2(nelx, nely, lx, ly);
 
 ndof  = max(max(Ndof));                  % number of degrees of freedom
 nelem = size(Edof,1);                    % number of elements
@@ -62,38 +63,47 @@ pdof = union((nelx+1)*2, ...             % lower right uy dof
 bc = zeros(length(pdof), 2);             % set pdfo to 0, i.e. roller
 bc(:,1) = pdof;
 
-% Element properties ------------------------------------------------------
-E0    = 200e9;                           % base material Young's modulus
-Emin  = E0/1e9;                          % minimum Young's modulus
-nu0   = 0.3;                             % base material Poisson's ratio
-rho0  = 7800;                            % base material density
-t     = 0.04*nelx*l;                     % element thickness [m]
-ep    = [E0, Emin, nu0, rho0, t, l];     % element properties
-
-ptype = 1;                               % plane stress
-D     = hooke(1, ptype, nu0);            % unit constitutive matrix
-
-Ke0   = planre([0 l],[0 l],[ptype t],D); % unit element stiffness matrix
-                                         % of a square element
-
-% Loading -----------------------------------------------------------------
-P = -1000;                               % Point load of 1 kN
-F = zeros(ndof,1);                       % initialize load vector
-F(ndof-nelx*2) = P;                      % put P in F
-
 % Design parameters -------------------------------------------------------
 x0 = ones(nelem,1)*0.4;                  % initial guess; all elements 40 %
 xp = [nelx            1;                 % prescribed parameters (leave
       nelx*(nely-1)+1 1];                % empty if none are to be
                                          % prescribed)
 
+% Strucutre ---------------------------------------------------------------
+s = UFactoryStrucutre(x0, xp, Edof, bc); % s is a struct that represents
+                                         % the structure that is to be
+                                         % optimized
+s.Ex = Ex;
+s.Ey = Ey;
+
+% Element properties ------------------------------------------------------
+s.E0    = 200e9;                         % base material Young's modulus
+s.Emin  = s.E0/1e9;                      % minimum Young's modulus
+nu0   = 0.3;                             % base material Poisson's ratio
+rho0  = 7800;                            % base material density
+t     = 0.04*nelx*lx;                    % element thickness [m]
+
+ptype = 1;                               % plane stress
+D     = hooke(1, ptype, nu0);            % unit constitutive matrix
+
+s.Ke0   = planre([0 lx],[0 ly],[ptype t],D);
+                                         % unit element stiffness matrix
+                                         % of a square element
+
+% Loading -----------------------------------------------------------------
+P = -1000;                               % Point load of 1 kN
+s.F = zeros(ndof,1);                     % initialize load vector
+s.F(ndof-nelx*2) = P;                    % put P in F
+
 % Objective function ------------------------------------------------------
-OFun = @OCompliance;                     % compliance objective function
+OFun = @ObjCompliance;                   % compliance objective function
 
 % Volume fraction constraint ----------------------------------------------
 vfrac = 0.3;                             % 30 % of the design domain should
                                          % be used
-
+s.Ve0 = lx*ly*t;
+s.V0  = nelem*s.Ve0;
+                                         
 % Interpolation settings --------------------------------------------------
 ip1 = {@EModSIMP, 3};                    % ModSIMP interpolation scheme
                                          % with penalization power 3
@@ -120,17 +130,17 @@ d2  = {1, 1, figure(2)};                 % print all and plott all in
 % density filter is used in both examples
 
 % Optimization using the ModSIMP interpolation scheme
-x11 = OptOC2( x0, xp, ep, Edof, bc, Ex, Ey, F, Ke0, OFun, vfrac, ip1, ft1, d1 );
+x11 = OptOC2( s, OFun, vfrac, ip1, ft1, d1 );
 
 % Optimization using the RAMP interpolation scheme
-x12 = OptOC2( x0, xp, ep, Edof, bc, Ex, Ey, F, Ke0, OFun, vfrac, ip2, ft1, d2 );
+x12 = OptOC2( s, OFun, vfrac, ip2, ft1, d2 );
 
 %% Section 3 - Optimization with different filters
 % Comparison of the the sensitivity filter and the density filter. The
 % ModSIMP interpolation scheme is used in both examples
 
 % Optimization using the density interpolation scheme
-x21 = OptOC2( x0, xp, ep, Edof, bc, Ex, Ey, F, Ke0, OFun, vfrac, ip1, ft1, d1 );
+x21 = OptOC2( s, OFun, vfrac, ip1, ft1, d1 );
 
 % Optimization using the sensitivity interpolation scheme
-x22 = OptOC2( x0, xp, ep, Edof, bc, Ex, Ey, F, Ke0, OFun, vfrac, ip1, ft2, d2 );
+x22 = OptOC2( s, OFun, vfrac, ip1, ft2, d2 );
