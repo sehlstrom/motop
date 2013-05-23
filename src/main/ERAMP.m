@@ -29,7 +29,7 @@ function [E, dE, ddE] = ERAMP(varargin)
 %       dE     vector of first order derivatives of E with respect to x
 %       ddE    vector of second order derivatives of E with respect to x
 %
-% See also: Elin Emodsimp
+% See also: ELin EModSIMP
 
 % LAST MODIFIED: A Sehlstrom    2013-05-23
 % Copyright (C)  A Sehlstrom

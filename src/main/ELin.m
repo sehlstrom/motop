@@ -26,9 +26,9 @@ function [E, dE, ddE] = ELin(varargin)
 %       dE     vector of first order derivatives of E with respect to x
 %       ddE    vector of second order derivatives of E with respect to x
 %
-% See also: Emodsimp Eramp
+% See also: EModSIMP ERAMP
 
-% LAST MODIFIED: A Sehlstrom    2013-05-21
+% LAST MODIFIED: A Sehlstrom    2013-05-23
 % Copyright (C)  A Sehlstrom
 
 if nargin < 2
