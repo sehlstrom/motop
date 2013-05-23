@@ -98,7 +98,7 @@ end
 
 % Solve displacements -----------------------------------------------------
 if exist('solveq','file') ~=2
-    error('OCompliance:CALFEM','CALFEM solveq has to be on the matlab path')
+    error('OCompliance:CALFEM','CALFEM "solveq" function has to be on the Matlab path')
 end
 u = solveq(K,F,bc);                       % solve using CALFEM solveq
 
