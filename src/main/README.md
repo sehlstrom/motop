@@ -1,4 +1,17 @@
 # Contents
+
+## Filter functions
+Filter functions, 'F*.m', have the following syntax:
+
+    x = F(H, Hs, x)
+    [x, dF] = F(H, Hs, x, dF)
+
+where 'H' and 'Hs' can be computed using the __FUsetup.m__ function.
+
+Functions:
+* __FDensity.m__ density filter; operates on both x and dF
+* __FSensitivity.m__ sensitivity filter; operates on dF
+
 ## Young's Modulus Interpolation Functions
 All Young's modulus interpolation functions, 'E*.m', have the following syntax:
 
