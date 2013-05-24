@@ -108,9 +108,9 @@ addOptional(parseo,'d',  {0, 0, []});
 addParamValue(parseo,'maxIter', 50,   @isinteger);
 addParamValue(parseo,'absTol',  1e-2, @isscalar);
 addParamValue(parseo,'gradTol', 1e-6, @isscalar);
-addParamValue(parseo,'lTol',    1e-4, @isscalar); % Tolerance for lagrangian multiplier
-addParamValue(parseo,'move',    0.2,  @isscalar);  % Move limit for update of x
-addParamValue(parseo,'eta',     0.5,  @isscalar);  % Numerical damping parameter
+addParamValue(parseo,'lTol',    1e-4, @isscalar);
+addParamValue(parseo,'move',    0.2,  @(x) (isscalar(x) && x >= 0));
+addParamValue(parseo,'eta',     0.5,  @isscalar);
 
 parseo.parse(s, OFun, vfrac, ip, ft, d, varargin{:});
 
