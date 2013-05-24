@@ -3,10 +3,11 @@ function [ x, k ] = OptOC2( s, OFun, vfrac, ip, ft, d, varargin )
 %method. Mesh consists of equal size square 2D elements.
 %
 %   SYNTAX
-%   x = OPTOC2( x0, xp, ep, Ke0, Edof, bc, Ex, Ey, F, OFun, vfrac )
-%   x = OPTOC2( x0, xp, ep, Ke0, Edof, bc, Ex, Ey, F, OFun, vfrac, ip )
-%   x = OPTOC2( x0, xp, ep, Ke0, Edof, bc, Ex, Ey, F, OFun, vfrac, ip, ft )
-%   x = OPTOC2( x0, xp, ep, Ke0, Edof, bc, Ex, Ey, F, OFun, vfrac, ip, ft, d )
+%   x = OPTOC2( s, OFun, vfrac )
+%   x = OPTOC2( s, OFun, vfrac, ip )
+%   x = OPTOC2( s, OFun, vfrac, ip, ft )
+%   x = OPTOC2( s, OFun, vfrac, ip, ft, d )
+%   x = OPTOC2( s, OFun, vfrac, ip, ft, d , params)
 %   [x, k] = OPTOC2(...)
 %
 %   DESCRITPTION
@@ -86,9 +87,19 @@ function [ x, k ] = OptOC2( s, OFun, vfrac, ip, ft, d, varargin )
 %                   iteration
 %          figure   figure handle that should be used when plotting
 %
+%   INPUT PARAMETERS
+%   'maxIter'   maximum number of iterations; default value: 50
+%   'absTol'    tolerance for absolut comparison; default value: 1e-2
+%   'gradTol'   tolerance for gradient norm; default value: 1e-6
+%   'lTol'      tolerance for Lagrangian multiplier (OC method); default
+%               value: 1e-4
+%   'move'      positive move limit (OC method); default value: 0.2
+%   'eta'       numerical damping coefficient (OC method); default value:
+%               0.5
+%
 %   OUTPUT ARGUMENTS
-%       x      optimized design parameters
-%       k      number of iterations
+%   x      optimized design parameters
+%   k      number of iterations
 %
 % See also: ELin, EModSIMP, ERAMP, FDensity, FSensitivity
 
