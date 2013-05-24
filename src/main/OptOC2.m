@@ -38,6 +38,15 @@ function [ x, k ] = OptOC2( s, OFun, vfrac, ip, ft, d, varargin )
 %   in x from the current iteration and the previous, and "N." is the norm
 %   of the first order derivative of the objective.
 %
+%   The OPTOC2 code is inspired by the articles [1] and [2].
+%
+%   [1] O. Sigmund. A 99 line topology optimization code written in matlab.
+%       Structural and Multidisciplinary Optimization, 21:120?127, 2001.
+%   [2] E. Andreassen, A. Clausen, M. Schevenels, B. Lazarov, and
+%       O. Sigmund. Efficient topology optimization in matlab using 88
+%       lines of code. Structural and Multidisciplinary Optimization,
+%       43:1?16, 2011.
+%
 %   INPUT ARGUMENTS
 %   s      a struct with at least the following fields
 %          x0     vector of initial guesses for the design parameters;
