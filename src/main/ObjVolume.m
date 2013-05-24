@@ -49,11 +49,11 @@ Ve0 = s.Ve0;
 
 % Input checks ------------------------------------------------------------
 if size(x,2) ~= 1
-    error('OCompliance:argChk', '"x" must be a row vector');
+    error('ObjVolume:argChk', '"x" must be a row vector');
 end
 
 if isnan(Ve0)
-    error('OCompliance:argChk', 'Element base volume "Ve0" in struct "s" has to be set');
+    error('ObjVolume:argChk', 'Element base volume "Ve0" in struct "s" has to be set');
 end
 
 % Setup -------------------------------------------------------------------
