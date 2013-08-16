@@ -1,4 +1,4 @@
-function [ x, k ] = OptOC2( s, OFun, vfrac, ip, ft, d, varargin )
+function [ x, O, k ] = OptOC2( s, OFun, vfrac, varargin )
 %OPTOC2 Topology optimization accoridng to the optimality cirteria (OC)
 %method. Mesh consists of equal size square 2D elements.
 %
@@ -8,7 +8,8 @@ function [ x, k ] = OptOC2( s, OFun, vfrac, ip, ft, d, varargin )
 %   x = OPTOC2( s, OFun, vfrac, ip, ft )
 %   x = OPTOC2( s, OFun, vfrac, ip, ft, d )
 %   x = OPTOC2( s, OFun, vfrac, ip, ft, d , params)
-%   [x, k] = OPTOC2(...)
+%   [x, f] = OPTOC2(...)
+%   [x, O, k] = OPTOC2(...)
 %
 %   DESCRITPTION
 %   All elements are square elements with sides of length l, nodes,
@@ -99,6 +100,7 @@ function [ x, k ] = OptOC2( s, OFun, vfrac, ip, ft, d, varargin )
 %
 %   OUTPUT ARGUMENTS
 %   x      optimized design parameters
+%   O      objective value
 %   k      number of iterations
 %
 % See also: ELin, EModSIMP, ERAMP, FDensity, FSensitivity
@@ -123,9 +125,13 @@ addParamValue(parseo,'lTol',    1e-4, @isscalar);
 addParamValue(parseo,'move',    0.2,  @(x) (isscalar(x) && x >= 0));
 addParamValue(parseo,'eta',     0.5,  @isscalar);
 
-parseo.parse(s, OFun, vfrac, ip, ft, d, varargin{:});
+parseo.parse(s, OFun, vfrac, varargin{:});
 
 % Extract
+ip = parseo.Results.ip;
+ft = parseo.Results.ft;
+d  = parseo.Results.d;
+
 stop_maxIter = parseo.Results.maxIter;
 stop_absTol  = parseo.Results.absTol;
 stop_gradTol = parseo.Results.gradTol;
