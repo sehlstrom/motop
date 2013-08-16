@@ -74,7 +74,7 @@ function [ x, k ] = OptOC2( s, OFun, vfrac, ip, ft, d, varargin )
 %   vfrac  volume fraction constraint; 0 < vfrac < 1
 %   ip     (optional) cell array with interpolation function and
 %          related interpolation parameter; ip = {@EFun, param}.
-%          If ip is not set, the ELin interplation function will be used.
+%          If ip is not set, the ELin interpolation function will be used.
 %   ft     (optional) cell array with filter function and related
 %          filter parameter; ft = {@FFun, rmin}
 %   d      (optional) cell array with display settings;
@@ -103,7 +103,7 @@ function [ x, k ] = OptOC2( s, OFun, vfrac, ip, ft, d, varargin )
 %
 % See also: ELin, EModSIMP, ERAMP, FDensity, FSensitivity
 
-% LAST MODIFIED: A Sehlstrom    2013-05-23
+% LAST MODIFIED: A Sehlstrom    2013-08-16
 % Copyright (C)  A Sehlstrom
 
 % Parse inputs ------------------------------------------------------------
