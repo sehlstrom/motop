@@ -7,7 +7,8 @@ function [ Me ] = UMassmatrix( lx, ly, t, rho )
 %
 %    DESCRIPTION
 %    UMASSMATRIX computes the element mass matrix of a rectangular element
-%    with sides lx and ly, thickness t and material density rho.
+%    with sides lx and ly, thickness t and material density rho. The
+%    computation is done using 2x2 Guass integration scheme.
 %
 %    INPUT ARGUMENTS
 %       lx     element length, x-direction
