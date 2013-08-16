@@ -30,6 +30,9 @@
 %                    ¯¯¯
 %           nelx 
 
+% LAST MODIFIED: A Sehlstrom    2013-08-16
+% Copyright (C)  A Sehlstrom
+
 % Make sure motop main functions are added to the search paths
 addpath(genpath(fullfile(fileparts(pwd),'main')), '-BEGIN');
 
@@ -73,14 +76,16 @@ xp = [nelx            1;                 % prescribed parameters (leave
 s = UFactoryStrucutre(x0, xp, Edof, bc); % s is a struct that represents
                                          % the structure that is to be
                                          % optimized
-s.Ex = Ex;
-s.Ey = Ey;
+
+s.Ex = Ex;                               % elemnet x-coordinates
+s.Ey = Ey;                               % elemnet y-coordinates
 
 % Element properties ------------------------------------------------------
 s.E0    = 200e9;                         % base material Young's modulus
-s.Emin  = s.E0/1e9;                      % minimum Young's modulus
+                                         % [Pa]
+s.Emin  = s.E0/1e9;                      % minimum Young's modulus [Pa]
 nu0   = 0.3;                             % base material Poisson's ratio
-rho0  = 7800;                            % base material density
+rho0  = 7800;                            % base material density [kg/m3]
 t     = 0.04*nelx*lx;                    % element thickness [m]
 
 ptype = 1;                               % plane stress
